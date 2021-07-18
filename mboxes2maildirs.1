@@ -1,0 +1,63 @@
+.\" $Id: mboxes2maildirs.1,v 1.1.1.1 2021/07/17 21:14:01 biscuit Exp $
+.\"
+.\" Copyright (c) 2021
+.\"
+.\" Permission to use, copy, modify, and distribute this software for any
+.\" purpose with or without fee is hereby granted, provided that the above
+.\" copyright notice and this permission notice appear in all copies.
+.\"
+.\" THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+.\" WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+.\" MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+.\" ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+.\" WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+.\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+.\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+.\"
+.Dd $Mdocdate: July 17 2021 $
+.Dt MBOXES2MAILDIRS 1
+.Os
+.Sh NAME
+.Nm mboxes2maildirs
+.Nd takes each mbox in a directory and converts to a maildir in a new directory
+.Sh SYNOPSIS
+.Nm mboxes2maildirs
+.Ar tmpdir Ar mboxdir Ar maildirdir
+.Sh DESCRIPTION
+The
+.Nm
+utility takes each mbox
+.Ar filename
+in
+.Ar mboxdir
+and creates a directory in
+.Ar tmpdir
+named
+.Ar filename
+containing separate files for each message.
+It then adds each numbered file
+to a maildir under
+.Ar maildirdir .
+.Sh FILES
+Requires the system to have:
+.Bl -tag -offset indent -width Ds -compact
+.It /usr/libexec/mail.maildir
+.El
+.Pp
+Each numbered file under each mbox filename remains
+in
+.Ar tmpdir .
+.Sh EXIT STATUS
+.Ex -std
+.Sh EXAMPLES
+If the mbox files are under /tmp/mymboxes and a temporary
+directory called /tmp/a has been created, and the directory
+that will contain the new Maildirs is ~/maildirs, then
+run:
+.Pp
+.Dl "mboxes2maildirs /tmp/a /tmp/mymboxes ~/maildirs"
+.Sh SEE ALSO
+.Xr mail.maildir 8
+.Sh BUGS
+Uses the system command to feed each message file to
+.Xr mail.maildir 8 .
